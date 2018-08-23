@@ -8,13 +8,13 @@
       <div class="radio">
         <label>
           <input type="radio" name="optionsRadios" id="online" value="option1" checked>
-          线上签约
+          线下签约
         </label>
       </div>
       <div class="radio underline-sign">
         <label>
           <input type="radio" name="optionsRadios" id="underline" value="option1" disabled>
-          线下签约&lt;敬请期待&gt;
+          线上签约&lt;敬请期待&gt;
         </label>
       </div>
     </form>

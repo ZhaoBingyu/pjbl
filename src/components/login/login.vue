@@ -153,10 +153,7 @@
       },
       // 重置
       goReset: function () {
-        this.phoneNumber = ''
-        this.codeNumber = ''
-        this.validateText = ''
-        this.phoneFlag = ''
+        Object.assign(this.$data, this.$options.data())
       }
     }
   }

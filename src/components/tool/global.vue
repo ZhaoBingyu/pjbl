@@ -9,7 +9,7 @@
      */
     isInputNull: function (data) {
       if (!data) {
-        return fakse
+        return false
       } else {
         return true
       }
