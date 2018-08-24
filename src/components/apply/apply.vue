@@ -4,15 +4,63 @@
       <li role="presentation" class="active"><a href="#">申请</a></li>
       <!--<li role="presentation"><a href="#">Profile</a></li>-->
     </ul>
-    <form class="form-horizontal">
-      <div class="form-group">
-        <label for="ticketNumber" class="col-sm-2 control-label">请输入票据号码：</label>
-        <div class="col-sm-10">
-          <input v-model="ticketNumber" v-on:blur=""
-          type="text" class="form-control" id="ticketNumber" placeholder="请输入票据号码">
-        </div>
-      </div>
-    </form>
+    <div class="info-box">
+      <ul class="list-group" v-if="trialData">
+        <li class="list-group-item">
+          <span>承兑商户名称：</span>
+          <span>{{trialData.honnerName}}</span>
+        </li>
+        <li class="list-group-item">
+          <span>票面金额：</span>
+          <span>{{trialData.ticketAmt}}</span>
+        </li>
+        <li class="list-group-item">
+          <span>票据到期日：</span>
+          <span>{{trialData.expireDate}}</span>
+        </li>
+        <li class="list-group-item">
+          <span>背书转让日期：</span>
+          <span>{{trialData.transferDate}}</span>
+        </li>
+        <li class="list-group-item">
+          <span>票据编号：</span>
+          <span>{{trialData.ticketNumber}}</span>
+        </li>
+        <li class="list-group-item">
+          <span>客户账号：</span>
+          <span>{{trialResultData.custNo}}</span>
+        </li>
+        <li class="list-group-item">
+          <span>保理比例：</span>
+          <span>{{trialResultData.ladRat}}</span>
+        </li>
+        <li class="list-group-item">
+          <span>保理金额：</span>
+          <span>{{trialResultData.feeAmt}}</span>
+        </li>
+        <li class="list-group-item">
+          <span>可用金额：</span>
+          <span>{{trialResultData.availableAmt}}</span>
+        </li>
+        <li class="list-group-item">
+          <span>账户名称：</span>
+          <span>{{trialResultData.cardName}}</span>
+        </li>
+        <li class="list-group-item">
+          <span>银行账号：</span>
+          <span>{{trialResultData.cardNo}}</span>
+        </li>
+        <li class="list-group-item">
+          <span>开户银行：</span>
+          <span>{{trialResultData.bankName}}</span>
+        </li>
+        <li class="list-group-item">
+          <span>开户行联行行号：</span>
+          <span>{{trialResultData.bankNo}}</span>
+        </li>
+      </ul>
+    </div>
+
     <div class="sign-btn-wrapper clearfix row">
       <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-3 col-xs-5 col-xs-offset-1">
         <button type="button" class="btn btn-primary  confirm-btn col-md-10 col-sm-10 col-xs-10" @click="goPre">上一步
@@ -31,16 +79,23 @@
     name: 'apply',
     data() {
       return {
-        ticketNumber: ''
+        trialData: null,
+        trialResultData: null
       }
     },
-
+    mounted() {
+      this.trialData = JSON.parse(window.sessionStorage.getItem('trialData'))
+      this.trialResultData = JSON.parse(window.sessionStorage.getItem('trialResultData'))
+      console.log(this.trialData)
+      console.log(this.trialResultData)
+    },
     methods: {
 
       //上一步
       goPre: function () {
         this.$router.push('/sign')
-      },
+      }
+      ,
       //完成
       goSubmit: function () {
         const sendUrl = "/api/login"
@@ -65,12 +120,9 @@
 <style scoped lang="less" rel="stylesheet/less">
   .apply {
     width: 100%;
-    @media screen and (min-width: 960px) {
-      width: 80%;
-    }
-    margin-top: 30px;
-    form {
-      margin-top: 20px;
+    height: 100%;
+    .list-group-item {
+      border: none;
     }
   }
 </style>

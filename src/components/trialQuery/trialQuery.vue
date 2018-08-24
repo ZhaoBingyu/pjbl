@@ -2,12 +2,12 @@
   <div class="trial container-fluid">
     <div class="trial-wrapper">
       <ul class="nav nav-tabs">
-        <li role="presentation" class="active" @click="toTrial">
+        <li role="presentation" class="" @click="toTrial">
           <a href="javascript:;">贴现利率试算</a>
 
         </li>
 
-        <li role="presentation" class="" @click="toTrialQuery">
+        <li role="presentation" class="active" @click="toTrialQuery">
           <a href="javascript:;">查询</a>
 
         </li>
@@ -92,17 +92,17 @@
             </div>
           </form>
         </div>
-        <div class="col-md-2 col-md-pull-3 trial-box">
+        <div class="col-md-2 col-md-pull-3">
           <button type="button" class="btn btn-success btn-block" @click="getTrial">试算</button>
           <div class="trial-result">
             <div class="row">
-              保理比例: <span>{{ladRat}}</span>
+              保理比例: <span>{{ladRat }}</span>
             </div>
             <div class="row">
-              保理金额: <span>{{feeAmt}}</span>
+              保理金额: <span>{{feeAmt }}</span>
             </div>
             <div class="row">
-              可用金额: <span>{{availableAmt}}</span>
+              可用金额: <span>{{availableAmt }}</span>
             </div>
           </div>
 
@@ -111,7 +111,7 @@
 
 
       <div class="trial-btn-wrapper clearfix row">
-        <div class="col-md-2 col-md-offset-4 col-sm-4 col-sm-offset-3 col-xs-5 col-xs-offset-1">
+        <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-3 col-xs-5 col-xs-offset-1">
           <button type="button" class="btn btn-primary  confirm-btn col-md-10 col-sm-10 col-xs-10" @click="goNext">下一步
           </button>
         </div>
@@ -135,7 +135,7 @@
         ladRat: '',
         feeAmt: '',
         availableAmt: '',
-        phoneNumber: '13843076612',
+        phoneNumber: '',
         honnerName: '',
         ticketAmt: '',
         expireDate: '',
@@ -159,8 +159,8 @@
     },
     mounted() {
       // this.dateDefind()
-
     },
+
     methods: {
       toTrial: function () {
         this.$router.push('/trial')
@@ -192,6 +192,12 @@
             sessionStorage.setItem('transferDate', transferDate)
           }
         })
+      },
+      toTrial: function () {
+        this.$router.push('/trial')
+      },
+      toTrialQuery: function () {
+        this.$router.push('/trialQuery')
       },
       //手机号码校验
       phoneValidate: function () {
@@ -278,7 +284,7 @@
         this.validateFlag = this.phoneFlag && this.honnerNameFlag && this.ticketAmtFlag && this.expireDateFlag && this.transferDateFlag
         if (this.validateFlag) {
           const trialData = {
-            phoneNumber: window.sessionStorage.getItem('phone'),
+            phoneNumber: this.phoneNumber,
             honnerName: this.honnerName,
             ticketAmt: this.ticketAmt,
             expireDate: this.expireDate,
@@ -286,9 +292,9 @@
             ticketNumber: this.ticketNumber
           }
           this.GLOBAL.trialData = trialData
-          window.sessionStorage.setItem('trialData',JSON.stringify(trialData))
-          // this.$router.push('/sign')
-          this.$router.push('/apply')
+          this.bus.$emit('sendTrialData', trialData)
+
+          this.$router.push('/sign')
         } else {
           this.phoneValidate() && this.honnerNameValidate() && this.ticketAmtValidate() && this.expireDateValidate() && this.transferDateValidate() && this.ticketNumberValidate()
 
@@ -301,7 +307,7 @@
       },
       // 试算接口
       getTrial: function () {
-        const sendUrl = window.pjbl.api.BillFactoring + "/YQLBillFactoring003"
+        const sendUrl = this.GLOBAL.api.BillFactoring + "/YQLBillFactoring003"
         const sendBody = {
           "acptName": this.honnerName,
           "amt": this.ticketAmt,
@@ -325,7 +331,6 @@
               const dataList = result.dataList
               const dataObj = JSON.parse(dataList[0])
               if (result.code === "2000") {
-                window.sessionStorage.setItem('trialResultData',dataList[0])
                 this.ladRat = dataObj.ladRat
                 this.feeAmt = dataObj.feeAmt
                 this.availableAmt = dataObj.availableAmt
@@ -373,14 +378,6 @@
       }
     }
 
-    .trial-btn-wrapper {
-      margin-top: 40px;
-    }
-    .trial-box{
-      .row{
-        margin-left: 10px;
-      }
-    }
     /*overflow: hidden;*/
     /*.trial-wrapper {*/
     /*width: 60%;*/

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <myHeader ></myHeader>
+    <myHeader></myHeader>
     <router-view/>
-    <myFooter ></myFooter>
+    <!--<myFooter></myFooter>-->
   </div>
 </template>
 
@@ -44,6 +44,10 @@
 
 <style scoped lang="less" rel="stylesheet/less">
   #app {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
     font-size: 12px;
   }
 </style>

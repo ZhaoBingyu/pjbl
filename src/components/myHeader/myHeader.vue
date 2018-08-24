@@ -1,70 +1,91 @@
 <template>
   <div class="my-header container-fluid">
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-                  data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Brand</a>
+    <div class="row logo-wrapper">
+      <div class="col-md-4 col-sm-6 col-xs-6">
+        <img :src="logo" alt="融联科技logo" class="img-responsive">
+      </div>
+      <div class="col-md-4 col-md-offset-4 col-sm-6 col-xs-6">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 col-xs-12">用户：{{phoneNumber}}</div>
+          <div class="col-md-6 col-sm-6 col-xs-12">退出</div>
         </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Link</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                 aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>
-          </ul>
-          <form class="navbar-form navbar-left">
-            <div class="form-group">
-              <input type="text" class="form-control" placeholder="Search">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-          </form>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Link</a></li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                 aria-expanded="false">Dropdown <span class="caret"></span></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div><!-- /.navbar-collapse -->
-      </div><!-- /.container-fluid -->
-    </nav>
+      </div>
+    </div>
+    <!--<div class="logo">-->
+    <!--&lt;!&ndash;<div class="row" style="text-align: right">&ndash;&gt;-->
+    <!--&lt;!&ndash;<span>用户:{{userName}}</span>&ndash;&gt;-->
+    <!--&lt;!&ndash;<span>退出</span>&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+    <!--</div>-->
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   export default {
-    name: 'myHeader'
+    name: 'myHeader',
+    data() {
+      return {
+        logo: require('./logo.png'),
+        userName: '',
+        hasLoginInfo: false,
+        phoneNumber:''
+      }
+    },
+    watch: {
+      '$route': 'getCommon'
+    },
+    mounted() {
+      this.getCommon()
+      this.phoneNumber = window.sessionStorage.getItem('phone')
+    },
+    methods: {
+      getCommon: function () {
+        if (this.$route.path === '/login') {
+          this.hasLoginInfo = false
+        } else {
+          this.hasLoginInfo = true
+        }
+      }
+    }
   }
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
+  .my-header {
+    height: 12%;
+    background: #f8f8f8;
+    .logo-wrapper {
+      height: inherit;
+      padding: 10px 10px 10px 20px;
+      img {
+        vertical-align: bottom;
+      }
+    }
+    /*.logo {*/
+    /*height: inherit;*/
+    /*margin-left: 100px;*/
+    /*margin-top: 10px;*/
+    /*background-image: url("logo.png");*/
+    /*background-repeat: no-repeat;*/
+    /*background-position: bottom;*/
+    /*}*/
+    /*.userInfo {*/
+    /*height: 80px;*/
+    /*font-size: 14px;*/
+    /*}*/
+  }
 
+  /*@media screen and(max-width: 760px) {*/
+  /*.my-header {*/
+  /*height: 50px;*/
+  /*.logo {*/
+  /*height: 30px;*/
+  /*margin-left: 20px;*/
+  /*margin-top: 10px;*/
+  /*background-image: url("logo.png");*/
+  /*background-repeat: no-repeat;*/
+  /*background-size: 160px 100%;*/
+  /*}*/
+  /*}*/
+  /*}*/
 </style>

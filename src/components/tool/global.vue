@@ -43,11 +43,15 @@
       return null
     }
   }
+  const api = {//接口地址
+    // BillFactoring: 'http://10.255.0.68:51001/BillFactoring'
+    BillFactoring: 'http://10.6.208.235:51001/BillFactoring'
+  }
   export default {
     userID, //登陆用户
     trialData, // 试算参数
-    validate   // 校验方法
-
+    validate,   // 校验方法
+    api//接口地址
   }
 </script>
 

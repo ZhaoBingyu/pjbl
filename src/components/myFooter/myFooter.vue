@@ -1,6 +1,7 @@
 <template>
 <div class="my-footer container-fluid">
-  footer
+  <div class="row">
+  </div>
 </div>
 </template>
 
@@ -11,5 +12,7 @@
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-
+.my-footer{
+  height: 24%;
+}
 </style>

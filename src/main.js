@@ -3,10 +3,14 @@
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import '@/lib/datetimepicker/css/bootstrap-datetimepicker.min.css'
+import './common/css/common.css'
 
 import 'bootstrap/dist/js/bootstrap.min.js'
 import '@/lib/datetimepicker/js/bootstrap-datetimepicker.js'
 import '@/lib/datetimepicker/js/bootstrap-datetimepicker.zh-CN.js'
+import '@/common/js/common.pjbl.js'
+import '@/common/js/common.pjbl.api.js'
+
 
 import Vue from 'vue'
 import App from './App'

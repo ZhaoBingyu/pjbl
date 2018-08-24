@@ -4,6 +4,7 @@ import login from '@/components/login/login'
 import trial from '@/components/trial/trial'
 import sign from '@/components/sign/sign'
 import apply from '@/components/apply/apply'
+import trialQuery from '@/components/trialQuery/trialQuery'
 
 Vue.use(Router)
 
@@ -32,6 +33,11 @@ export default new Router({
       path: '/apply', //提交申请页
         name: 'apply',
       component: apply
+    },
+    {
+      path: '/trialQuery', //查询页
+      name: 'trialQuery',
+      component: trialQuery
     }
   ]
 })
