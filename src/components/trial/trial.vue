@@ -1,125 +1,122 @@
 <template>
-  <div class="trial container-fluid">
-    <div class="trial-wrapper">
-      <ul class="nav nav-tabs">
-        <li role="presentation" class="active" @click="toTrial">
-          <a href="javascript:;">贴现利率试算</a>
-
-        </li>
-
-        <li role="presentation" class="" @click="toTrialQuery">
-          <a href="javascript:;">查询</a>
-
-        </li>
-
-        <!--<li role="presentation"><a href="#">Profile</a></li>-->
-      </ul>
-      <div class="row">
-        <div class="col-md-10 ">
-          <form class="form-horizontal">
-            <div class="form-group">
-              <div class="row">
-                <div class="col-sm-6">
-                  <label for="honnerName" class="col-sm-4 control-label"><span>*</span>承兑商户名称：</label>
-                  <div class="col-sm-8">
-                    <input v-model="honnerName" v-on:blur="honnerNameValidate"
-                           type="text" class="form-control" id="honnerName" placeholder="请输入承兑商户名称">
-                  </div>
-                  <div class="validate-text col-sm-offset-4 col-sm-8" v-text="honnerNameValidateText"></div>
+  <!--<div class="trial container-fluid" :style="backgroundImgUrl">-->
+    <div class="trial container-fluid" >
+    <div class="trial-container">
+      <!--导航 start-->
+      <myNav></myNav>
+      <!--导航 end-->
+      <!--试算 start-->
+      <div class="trial-wrapper">
+        <!--试算表单 start-->
+        <div class="row trial-query-wrapper">
+          <!--试算信息输入 start-->
+          <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
+          <div>
+            <div class="row" style="padding-top: 25px; border: 1px solid #ccc; border-radius: 25px;">
+              <form id="trialForm">
+                <div class="col-md-6 col-sm-6 col-xs-12 input-item">
+                  <label for="honnerName" class="col-md-4 col-sm-5 col-xs-12"><span>*</span>承兑企业名称：</label>
+                  <input v-model="honnerName" v-on:blur="honnerNameValidate"
+                         type="text" class="form-control col-md-8 col-sm-7 col-xs-12 " id="honnerName"
+                         placeholder="请输入承兑企业名称">
                 </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-sm-6">
-                  <label for="ticketAmt" class="col-sm-4 control-label"><span>*</span>票面金额：</label>
-                  <div class="col-sm-8">
-                    <input v-model="ticketAmt" v-on:blur="ticketAmtValidate"
-                           type="number" class="form-control" id="ticketAmt" placeholder="请输入票面金额">
-                  </div>
-                  <div class="validate-text col-sm-offset-4 col-sm-8" v-text="ticketAmtValidateText"></div>
+                <div class="col-md-6 col-sm-6 col-xs-12 input-item">
+                  <label for="ticketAmt" class="col-md-4 col-sm-5 col-xs-4"><span>*</span>票面金额：</label>
+                  <input v-model="ticketAmt" v-on:blur="ticketAmtValidate"
+                         type="text" class="form-control col-md-8 col-sm-7 col-xs-8" id="ticketAmt"
+                         placeholder="请输入票面金额">
                 </div>
-
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row">
-
-                <div class="col-sm-6">
-                  <label for="expireDate" class="col-sm-4 control-label"><span>*</span>票据到期日：</label>
-                  <div class="col-sm-8">
-                    <!--<input v-model="expireDate" v-on:blur="expireDateValidate" v-if="hasReset"-->
-                    <!--type="text" data-date-format="yyyy-mm-dd" class="form-control datetimepicker"-->
-                    <!--id="expireDate" placeholder="请输入票据到期日">-->
-                    <input v-model="expireDate" v-on:blur="expireDateValidate" v-if="hasReset"
-                           type="date" class="form-control "
-                           id="expireDate" placeholder="请输入票据到期日">
-                  </div>
-                  <div class="validate-text col-sm-offset-4 col-sm-8" v-text="expireDateValidateText"></div>
+                <div class="col-md-6 col-sm-6 col-xs-12 input-item">
+                  <label for="transferDate" class="col-md-4 col-sm-5 col-xs-12"><span>*</span>背书转让日期：</label>
+                  <input v-model="transferDate" v-on:blur="transferDateValidate" type="date"
+                         class="form-control col-md-8 col-sm-7 col-xs-12 " id="transferDate" placeholder="请输入背书转让日期">
                 </div>
-              </div>
-            </div>
-            <div class="form-group">
-              <div class="row">
-                <div class="col-sm-6">
-                  <label for="transferDate" class="col-sm-4 control-label"><span>*</span>背书转让日期：</label>
-                  <div class="col-sm-8">
-                    <!--<input v-model="transferDate" v-on:blur="transferDateValidate"-->
-                    <!--type="text" data-date-format="yyyy-mm-dd" class="form-control datetimepicker"-->
-                    <!--id="transferDate" placeholder="请输入背书转让日期">-->
-                    <input v-model="transferDate" v-on:blur="transferDateValidate"
-                           type="date" class="form-control "
-                           id="transferDate" placeholder="请输入背书转让日期">
-
-                  </div>
-                  <div class="validate-text col-sm-offset-4 col-sm-8" v-text="transferDateValidateText"></div>
+                <div class="col-md-6 col-sm-6 col-xs-12 input-item">
+                  <label for="expireDate" class="col-md-4 col-sm-5 col-xs-12"><span>*</span>票据到期日：</label>
+                  <!--<input v-model="expireDate" v-on:blur="expireDateValidate" v-if="hasReset"-->
+                  <!--type="text" data-date-format="yyyy-mm-dd" class="form-control datetimepicker"-->
+                  <!--id="expireDate" placeholder="请输入票据到期日">-->
+                  <input v-model="expireDate" v-on:blur="expireDateValidate" v-if="hasReset"
+                         type="date" class="form-control col-md-8 col-sm-7 col-xs-12 "
+                         id="expireDate" placeholder="请输入票据到期日">
                 </div>
 
-              </div>
+                <!--<div class="col-md-6 col-sm-6 col-xs-12 input-item">-->
+                <!--<label for="ticketNumber" class="col-md-4 col-sm-5 col-xs-12"><span></span>票据编号：</label>-->
+                <!--<input v-model="ticketNumber" type="text" class="form-control col-md-8 col-sm-7 col-xs-12"-->
+                <!--id="ticketNumber"-->
+                <!--placeholder="请输入票据编号">-->
+                <!--</div>-->
+                <!--显示Error Info  start-->
+                <div class="col-md-12 col-sm-12 col-xs-12  validate-text">{{validateText}}</div>
+                <!--显示Error Info  end-->
+              </form>
             </div>
-            <div class="form-group">
-              <div class="row">
+            <hr>
+            <!--试算信息输入 end-->
 
-                <div class="col-sm-6">
-                  <label for="ticketNumber" class="col-sm-4 control-label"><span></span>票据编号：</label>
-                  <div class="col-sm-8">
-                    <input v-model="ticketNumber"
-                           type="text" class="form-control" id="ticketNumber" placeholder="请输入票据编号">
-                  </div>
-                  <div class="validate-text col-sm-offset-4 col-sm-8" v-text="ticketNumberValidateText"></div>
-                </div>
-              </div>
-            </div>
-          </form>
-        </div>
-        <div class="col-md-2 col-md-pull-3 trial-box">
-          <button type="button" class="btn btn-success btn-block" @click="getTrial">试算</button>
-          <div class="trial-result">
-            <div class="row">
-              保理比例: <span>{{ladRat}}</span>
-            </div>
-            <div class="row">
-              保理金额: <span>{{feeAmt}}</span>
-            </div>
-            <div class="row">
-              可用金额: <span>{{availableAmt}}</span>
-            </div>
           </div>
+          <!--试算结果 start-->
+          <div class="row">
+            <div class=" trial-result-wrapper">
+              <div class="row trial-btn-box">
+                <!--<div class="row">-->
+                <!--<button type="button" class="btn btn-success col-md-3  col-sm-3  col-xs-12 " @click="getTrial">试算-->
+                <!--</button>-->
+                <!--</div>-->
+                <div class="row trialResult" style="display: none">
+                  <div class=" col-sm-4 col-xs-12  result-item">
+                    <button type="button" class="btn btn-info">保理比例: <span>{{ ladRat + '%'}}</span></button>
+                    <!--保理比例: <span>{{ ladRat + '%'}}</span>-->
+                  </div>
+                  <div class="col-sm-4 col-xs-12 result-item">
+                    <button type="button" class="btn btn-info">保理金额: <span>{{'￥'+feeAmt}}</span></button>
+                    <!--保理金额: <span>{{'￥'+feeAmt}}</span>-->
+                  </div>
+                  <div class="col-sm-4 col-xs-12 result-item">
+                    <button type="button" class="btn btn-info">可用金额: <span>{{'￥'+availableAmt}}</span></button>
+                    <!--可用金额: <span>{{'￥'+availableAmt}}</span>-->
+                  </div>
+                </div>
 
+              </div>
+              <!--显示Error Info  start-->
+              <div class="col-md-12 col-sm-12 col-xs-12  validate-text">{{trialResultMsg}}</div>
+              <!--显示Error Info  end-->
+            </div>
+
+          </div>
+          <!--试算结果 end-->
         </div>
-      </div>
-
-
-      <div class="trial-btn-wrapper clearfix row">
-        <div class="col-md-2 col-md-offset-4 col-sm-4 col-sm-offset-3 col-xs-5 col-xs-offset-1">
-          <button type="button" class="btn btn-primary  confirm-btn col-md-10 col-sm-10 col-xs-10" @click="goNext">下一步
+        <!--&lt;!&ndash;票据编号 start&ndash;&gt;-->
+        <!--<form class="form-horizontal">-->
+        <!--<div class="form-group ticket-number">-->
+        <!--<label for="ticketNumber" class="col-sm-2 control-label"><span>*</span>票据编号:</label>-->
+        <!--<div class="col-sm-5">-->
+        <!--<input type="text" class="form-control" id="ticketNumber" v-model="ticketNumber" placeholder="请输入票据编号">-->
+        <!--</div>-->
+        <!--<div class=" col-sm-5   ticket-validate-text">11111{{ticketNumberValidate}}</div>-->
+        <!--</div>-->
+        <!--</form>-->
+        <!--&lt;!&ndash;票据编号 end&ndash;&gt;-->
+        <!--试算表单 end-->
+        <!--按钮组 start-->
+        <div class="row btn-box">
+          <button type="button" class="btn btn-success col-md-3  col-sm-3  col-xs-12  col-md-offset-2  col-sm-offset-2"
+                  @click="getTrial">试算
           </button>
-        </div>
-        <div class="col-md-2 col-sm-4  col-xs-5">
-          <button type="button" class="btn btn-warning  reset-btn col-md-10 col-sm-10 col-xs-10" @click="goReset">重置
+          <button type="button"
+                  class="btn btn-primary  confirm-btn col-md-3 col-md-offset-3 col-sm-3 col-sm-offset-2 col-xs-4 col-xs-offset-1"
+                  @click="goNext">下一步
           </button>
+          <!--<button type="button"-->
+          <!--class="btn btn-warning  reset-btn col-md-3 col-md-offset-1 col-sm-3 col-sm-offset-1 col-xs-4 col-xs-offset-2"-->
+          <!--@click="goReset">重置-->
+          <!--</button>-->
         </div>
+        <!--按钮组 start-->
       </div>
+      <!--试算 end-->
     </div>
 
 
@@ -127,15 +124,22 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import myNav from '@/components/trial/myNav'
+
+
   export default {
     name: 'trial',
-    components: {},
+    components: {
+      myNav
+    },
     data() {
       return {
+        trialResultMsg: '',
+        validateText: '',
         ladRat: '',
         feeAmt: '',
         availableAmt: '',
-        phoneNumber: '13843076612',
+        phoneNumber: '',
         honnerName: '',
         ticketAmt: '',
         expireDate: '',
@@ -154,20 +158,24 @@
         transferDateFlag: false,
         ticketNumberFlag: false,
         validateFlag: false,
-        hasReset: true
+        hasReset: true,
+        backgroundImgUrl: {
+          backgroundImage: 'url(' + require('../../common/img/tiexian-bg.png') + ')'
+        }
+      }
+    },
+    created() {
+      //检测用户是否登录
+      const phoneNumber = window.sessionStorage.getItem('phone')
+      if (window.pjbl.check.isNull(phoneNumber)) {
+        this.$router.push('/login')
       }
     },
     mounted() {
-      // this.dateDefind()
 
     },
     methods: {
-      toTrial: function () {
-        this.$router.push('/trial')
-      },
-      toTrialQuery: function () {
-        this.$router.push('/trialQuery')
-      },
+
       //  日期空间初始化
       dateDefind() {
         var self = this
@@ -193,150 +201,153 @@
           }
         })
       },
-      //手机号码校验
-      phoneValidate: function () {
-        this.phoneValidateText = this.GLOBAL.validate.phoneNumber(this.phoneNumber)
-        if (!this.phoneValidateText) {
-          this.phoneFlag = true
-          return true
-        }
-      },
+      /**  用户输入校验 start */
       //承兑商户名称校验
       honnerNameValidate: function () {
-        this.honnerNameValidateText = this.GLOBAL.validate.isInputNull(this.honnerName)
-        if (this.honnerNameValidateText) {
-          this.honnerNameFlag = true
-          this.honnerNameValidateText = ''
-          return true
-        } else {
-          this.honnerNameValidateText = '承兑商户名称不能为空'
+        if (window.pjbl.check.isNull(this.honnerName)) {
+          this.validateText = '承兑企业名称不能为空'
+          return
         }
+        this.honnerNameFlag = true
+        this.validateText = ''
+        return true
       },
       //票面金额校验
       ticketAmtValidate: function () {
-        this.ticketAmtValidateText = this.GLOBAL.validate.isInputNull(this.ticketAmt)
-        if (this.ticketAmtValidateText) {
-          this.ticketAmtFlag = true
-          this.ticketAmtValidateText = ''
-          return true
-        } else {
-          this.ticketAmtValidateText = '票面金额不能为空'
+        if (window.pjbl.check.isNull(this.ticketAmt)) {
+          this.validateText = '票面金额不能为空'
+          return
         }
+        if (!window.pjbl.check.float(this.ticketAmt)) {
+          this.validateText = '票面金额输入有误'
+          return
+        }
+        if (parseFloat(this.ticketAmt) < 10000) {
+          this.validateText = '票面金额不能小于10000'
+          return
+        }
+        this.ticketAmtFlag = true
+        this.validateText = ''
+        return true
       },
       //票据到期日校验
       expireDateValidate: function () {
-        // $('.datetimepicker').datetimepicker().on('changeDate', function () {
-        //   const expireDate = $('#expireDate').val()
-        //   if (expireDate) {
-        //     sessionStorage.setItem('expireDate', expireDate)
-        //   }
-        // })
-        // this.expireDate = sessionStorage.getItem('expireDate')
-        this.expireDateValidateText = this.GLOBAL.validate.isInputNull(this.expireDate)
-        if (this.expireDateValidateText) {
-          this.expireDateFlag = true
-          this.expireDateValidateText = ''
-          return true
-        } else {
-          this.expireDateValidateText = '票据到期日不能为空'
+        if (window.pjbl.check.isNull(this.expireDate)) {
+          this.validateText = '票据到期日不能为空'
+          return
         }
-        this.hackReset = false
-        this.$nextTick(() => {
-          this.hackReset = true
-        })
+        this.expireDateFlag = true
+        this.validateText = ''
+        return true
       },
       //背书转让日期校验
       transferDateValidate: function () {
-        // $('.datetimepicker').datetimepicker().on('changeDate', function () {
-        //   const transferDate = $('#transferDate').val()
-        //   if (transferDate) {
-        //     sessionStorage.setItem('transferDate', transferDate)
-        //   }
-        // })
-        // this.transferDate = sessionStorage.getItem('transferDate')
-        this.transferDateValidateText = this.GLOBAL.validate.isInputNull(this.transferDate)
-        if (this.transferDateValidateText) {
-          this.transferDateFlag = true
-          this.transferDateValidateText = ''
-          return true
-        } else {
-          this.transferDateValidateText = '背书转让日期不能为空'
+        if (window.pjbl.check.isNull(this.transferDate)) {
+          this.validateText = '背书转让日期不能为空'
+          return
         }
+        this.transferDateFlag = true
+        this.validateText = ''
+        return true
       },
-      //票据编号校验
-      ticketNumberValidate: function () {
-        this.ticketNumberValidateText = this.GLOBAL.validate.isInputNull(this.ticketNumber)
-        if (this.ticketNumberValidateText) {
-          this.ticketNumberFlag = true
-          this.ticketNumberValidateText = ''
-          return true
-        } else {
-          this.ticketNumberValidateText = '票据编号不能为空'
-        }
-      },
-      goNext: function () {
-        this.validateFlag = this.phoneFlag && this.honnerNameFlag && this.ticketAmtFlag && this.expireDateFlag && this.transferDateFlag
-        if (this.validateFlag) {
-          const trialData = {
-            phoneNumber: window.sessionStorage.getItem('phone'),
-            honnerName: this.honnerName,
-            ticketAmt: this.ticketAmt,
-            expireDate: this.expireDate,
-            transferDate: this.transferDate,
-            ticketNumber: this.ticketNumber
-          }
-          this.GLOBAL.trialData = trialData
-          window.sessionStorage.setItem('trialData',JSON.stringify(trialData))
-          // this.$router.push('/sign')
-          this.$router.push('/apply')
-        } else {
-          this.phoneValidate() && this.honnerNameValidate() && this.ticketAmtValidate() && this.expireDateValidate() && this.transferDateValidate() && this.ticketNumberValidate()
 
-        }
+      /*用户输入校验 end*/
 
-      },
-      // 重置
-      goReset: function () {
-        Object.assign(this.$data, this.$options.data())
-      },
       // 试算接口
       getTrial: function () {
+        if (!this.honnerNameValidate()) {
+          return
+        }
+        if (!this.ticketAmtValidate()) {
+          return
+        }
+        if (!this.expireDateValidate()) {
+          return
+        }
+        if (!this.transferDateValidate()) {
+          return
+        }
+
+        const trialData = {
+          phoneNumber: window.sessionStorage.getItem('phone'),
+          honnerName: this.honnerName,
+          ticketAmt: this.ticketAmt,
+          expireDate: this.expireDate,
+          transferDate: this.transferDate,
+          ticketNumber: this.ticketNumber
+        }
+        window.sessionStorage.setItem('trialData', JSON.stringify(trialData))
         const sendUrl = window.pjbl.api.BillFactoring + "/YQLBillFactoring003"
         const sendBody = {
+          "phone": window.sessionStorage.getItem('phone'),
           "acptName": this.honnerName,
           "amt": this.ticketAmt,
-          "billNo": this.ticketNumber,
           "dueDate": this.expireDate.replace(/-/g, ''),
           "indorsDate": this.transferDate.replace(/-/g, ''),
-          "phone": this.phoneNumber
+          "billNo": this.ticketNumber
         }
-        window.sessionStorage.setItem('phone', this.phoneNumber)
-        this.$http.post(sendUrl, {
-          "acptName": "保利地产1",
-          "amt": 50000.00,
-          "dueDate": "20190808",
-          "indorsDate": "20180808",
-          "billNo": "9898988787899",
-          "phone": "18801176433"
-        })
+        // const sendBody = {
+        //   "acptName": "保利地产1",
+        //   "amt": 50000.00,
+        //   "dueDate": "20190808",
+        //   "indorsDate": "20180808",
+        //
+        //   "phone": "18801176433"
+        // }
+        this.$http.post(sendUrl, sendBody)
           .then(
             (response) => {
+
               const result = response.body
-              const dataList = result.dataList
-              const dataObj = JSON.parse(dataList[0])
               if (result.code === "2000") {
-                window.sessionStorage.setItem('trialResultData',dataList[0])
+                const dataList = result.dataList
+                const dataObj = JSON.parse(dataList[0])
+                window.sessionStorage.setItem('trialResultData', dataList[0])
                 this.ladRat = dataObj.ladRat
                 this.feeAmt = dataObj.feeAmt
                 this.availableAmt = dataObj.availableAmt
+
+                this.ladRat = this.ladRat * 100
+                this.feeAmt = this.feeAmt.toFixed(2)
+                this.availableAmt = this.availableAmt.toFixed(2)
+                $('.trialResult').show()
+                this.trialResultMsg = ''
               } else {
-                // this.validateText = result.message
+                console.log(result.message)
+                this.trialResultMsg = result.message
               }
             },
             (error) => {
               console.log(error)
             }
           )
+      },
+
+      /* 下一步 Btn */
+      goNext: function () {
+        if (!this.honnerNameValidate()) {
+          return
+        }
+        if (!this.ticketAmtValidate()) {
+          return
+        }
+        if (!this.expireDateValidate()) {
+          return
+        }
+        if (!this.transferDateValidate()) {
+          return
+        }
+        if (this.trialResultMsg !== '') {
+          return
+        }
+
+        this.getTrial()
+
+        this.$router.push('/apply')
+      },
+      // 重置
+      goReset: function () {
+        Object.assign(this.$data, this.$options.data())
       }
 
     }
@@ -344,69 +355,192 @@
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-  .trial-wrapper {
-    width: 70%;
-    margin: auto;
-    margin-top: 60px;
+  .ticket-validate-text {
+    text-align: left;
+    color: red;
+    font-size: 16px;
+    height: 34px;
+    line-height: 34px;
   }
 
-  .nav {
-    margin-bottom: 30px;
-  }
+  @media screen {
+    .trial {
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+    }
 
-  .trial {
-    width: 100%;
-    height: 88%;
-    background-image: url("tiexian-bg.png");
-    background-size: 100% auto;
-    .trial-result {
-      div {
-        font-size: 16px;
-        /*padding-left: 45px;*/
-        height: 28px;
-        line-height: 24px;
-        margin-top: 10px;
-        /*font-weight: bold;*/
-        span {
-          color: red;
+    .trial-wrapper {
+      margin-top: 10px;
+      margin-left: 26px;
+      margin-right: 26px;
+      .trial-query-wrapper {
+        #trialForm {
+          .input-item {
+            margin-bottom: 6px;
+            padding: 0;
+            padding-right: 6px;
+            label {
+              width: 33.33333333%;
+              padding-left: 0px;
+              padding-right: 0px;
+              height: 23px;
+              line-height: 1.7;
+              font-size: 13px;
+              text-align: right;
+              span {
+                color: red;
+                font-weight: bold;
+              }
+            }
+            .form-control {
+              width: 66.66666667%;
+            }
+          }
+        }
+        .trial-result-wrapper {
+          .trial-btn-box {
+            padding-left: 6px;
+            padding-right: 6px;
+          }
+          button {
+            margin-bottom: 6px;
+          }
+          .trial-result {
+
+          }
+          .result-item {
+            height: 23px;
+            line-height: 23px;
+            font-size: 13px;
+            text-align: center;
+          }
+        }
+      }
+      .ticket-number {
+        label {
+          padding-left: 0px;
+          padding-right: 0px;
+          height: 23px;
+          line-height: 1.7;
+          font-size: 13px;
+          span {
+            color: red;
+            font-weight: bold;
+          }
+        }
+
+      }
+      .btn-box {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        .result-item {
+          font-size: 13px;
+          margin-bottom: 8px;
+        }
+      }
+      .validate-text {
+        font-size: 14px;
+        color: red;
+        margin-bottom: 18px
+      }
+    }
+
+    @media (min-width: 768px) {
+      .trial {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: auto 100%;
+      }
+
+      .trial-container {
+        width: 60%;
+        margin: auto;
+      }
+
+      .trial-wrapper {
+
+        margin-top: 50px;
+
+        .trial-query-wrapper {
+          #trialForm {
+            .input-item {
+              margin-bottom: 24px;
+              label {
+                padding-right: 0px;
+                height: 34px;
+                line-height: 1.7;
+                text-align: right;
+                font-size: 15px;
+              }
+              .form-control {
+                width: 58.33333333%;
+              }
+            }
+          }
+          .trial-result-wrapper {
+            button {
+              margin-bottom: 20px;
+            }
+            .result-item {
+              margin-bottom: 24px;
+              line-height: 1.7;
+              font-size: 17px;
+              span {
+                padding-left: 10px;
+              }
+            }
+            .trial-result {
+
+            }
+
+          }
+        }
+        .validate-text {
+          text-align: right;
+          padding-right: 40px;
+        }
+      }
+
+    }
+    @media (min-width: 992px) {
+      #trialForm {
+        .input-item {
+          label {
+            text-align: right;
+            padding-right: 0px;
+          }
+          .form-control {
+            width: 66.66666667%;
+          }
         }
       }
     }
 
-    .trial-btn-wrapper {
-      margin-top: 40px;
-    }
-    .trial-box{
-      .row{
-        margin-left: 10px;
-      }
-    }
-    /*overflow: hidden;*/
-    /*.trial-wrapper {*/
-    /*width: 60%;*/
-    /*margin: auto;*/
-    /*padding-top: 40px;*/
-    /*form {*/
-    /*margin-top: 40px;*/
-    /*margin-bottom: 40px;*/
-    /*}*/
   }
 
-  /*@media screen and (min-width: 960px) {*/
-  /*width: 80%;*/
-  /*}*/
-  /*margin-top: 30px;*/
-  /*form {*/
-  /*margin-top: 20px;*/
-  /*}*/
+  .form-control {
+    display: block;
+    /* width: 100%; */
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+  }
 
-  /*}*/
-  /*.nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {*/
-  /*background: none;*/
-  /*color: orangered;*/
-  /*}*/
-  /*.validate-text {*/
-  /*color: orangered;*/
-  /*}*/
 
 </style>

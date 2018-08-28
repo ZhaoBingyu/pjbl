@@ -76,7 +76,7 @@
     color: orangered;
   }
   .sign {
-    background-image: url("qianyue-bg.png");
+    background-image: url("../../common/img/qianyue-bg.png");
     background-size: 100% auto;
     width: 100%;
     height: 540px;
