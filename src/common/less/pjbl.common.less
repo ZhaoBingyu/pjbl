@@ -1,0 +1,445 @@
+/* pjbl 样式框架 1.0 start*/
+
+/*获取验证码按钮 start*/
+.code {
+  .btn-primary.active {
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+  }
+
+  .btn-primary:hover {
+    cursor: not-allowed;
+    color: #555;
+    background-color: #eee;
+    border: 1px solid #ccc;
+  }
+
+  .btn-primary.active:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #286090;
+    border-color: #204d74;
+  }
+
+}
+
+/*获取验证码按钮 end*/
+
+/* 超小屏幕（手机，小于 768px） */
+@media screen {
+  /* app start */
+  #app {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    margin: auto;
+    padding: 0;
+    font-size: 12px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    /* app header start */
+    .my-header {
+      width: 100%;
+      height: 60px;
+      box-sizing: border-box;
+      padding-top: 6px;
+      padding-bottom: 4px;
+      //padding-left: 10px;
+      background: #fff;
+      border-bottom: 1px solid #c4c4c4;
+    }
+    /* app header end */
+
+    /* app container start */
+    .container {
+      width: 100%;
+      height: 100%;
+      margin-top: -60px;
+    }
+    /* app container end */
+
+    /*app login start*/
+    .login {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: rgba(0, 0, 0, 0.3);
+      .login-box {
+        height: 100%;
+        > .row {
+          margin-right: 0px;
+          margin-left: 0px;
+          margin: auto;
+          padding: 0;
+        }
+        .title {
+          margin-top: 60px;
+          text-align: center;
+          font-size: 22px;
+          font-weight: bold;
+          color: #fff;
+          text-shadow: 5px 5px 5px #FF0000;
+          text-shadow: #e9a7a4;
+        }
+        .login-form-box {
+          margin: auto;
+          margin-top: 50px;
+          padding: 0;
+          margin-right: 45px;
+          .login-form {
+            width: 90%;
+            margin: auto;
+            label {
+              height: 34px;
+              line-height: 34px;
+              text-align: right;
+              color: #f9f9f9;
+              font-weight: bold;
+            }
+          }
+          .validate-text {
+            text-align: right;
+            color: red;
+          }
+        }
+        .btnBox {
+          margin: 0;
+          margin-top: 70px;
+          button {
+          }
+        }
+      }
+    }
+    /*app login end*/
+
+    /*app trial start*/
+    .trial {
+      .trial-wrapper {
+        .trial-query-wrapper {
+          margin: 0;
+          padding: 0;
+          #trialForm {
+            margin-top: 20px;
+            .input-item {
+              margin-bottom: 6px;
+              padding: 0;
+              padding-right: 6px;
+              label {
+                width: 33.33333333%;
+                padding-left: 0px;
+                padding-right: 0px;
+                height: 23px;
+                line-height: 1.7;
+                font-size: 13px;
+                text-align: right;
+                span {
+                  color: red;
+                  font-weight: bold;
+                }
+              }
+              .form-control {
+                width: 66.66666667%;
+              }
+            }
+          }
+          .trial-result-wrapper {
+            .trial-btn-box {
+              padding-left: 6px;
+              padding-right: 6px;
+            }
+            button {
+              margin-bottom: 6px;
+            }
+            .trial-result {
+            }
+            .result-item {
+              height: 23px;
+              line-height: 23px;
+              font-size: 12px;
+              margin-bottom: 20px;
+
+            }
+          }
+        }
+        .ticket-number {
+          label {
+            padding-left: 0px;
+            padding-right: 0px;
+            height: 23px;
+            line-height: 1.7;
+            font-size: 13px;
+            span {
+              color: red;
+              font-weight: bold;
+            }
+          }
+
+        }
+        .btn-box {
+          margin-top: 20px;
+          margin-bottom: 20px;
+          .result-item {
+            font-size: 13px;
+            margin-bottom: 8px;
+          }
+        }
+        .validate-text {
+          font-size: 14px;
+          color: red;
+          margin-bottom: 18px
+        }
+      }
+      .ticket-validate-text {
+        text-align: left;
+        color: red;
+        font-size: 16px;
+        height: 34px;
+        line-height: 34px;
+      }
+    }
+    /*app trial end*/
+
+    /*app trial-query start*/
+    .trial-query {
+      .trial-query-wrapper {
+        margin-top: 30px;
+        .query-item {
+          margin-bottom: 20px;
+          padding: 0;
+          padding-right: 16px;
+          text-align: right;
+          > div {
+            margin-bottom: 10px;
+          }
+          label {
+            padding: 0;
+            height: 34px;
+            line-height: 30px;
+          }
+          div {
+            padding: 0;
+          }
+          .time-hr {
+            width: 1.8888888%;
+            padding: 0 6px;
+            text-align: center;
+            margin: auto;
+            font-size: 28px;
+            margin-bottom: 20px;
+          }
+        }
+        .query-list-wrapper {
+          margin: 0;
+          padding: 0;
+          width: 100%;
+          .result-title {
+            font-size: 12px;
+            font-weight: bold;
+            color: orangered;
+          }
+          .result-hr {
+            margin-top: 5px;
+            margin-left: -8px;
+            border-bottom: 1px solid orangered;
+          }
+        }
+      }
+    }
+    /*app trial-query end*/
+
+  }
+
+  /* app end */
+}
+
+/* 小屏幕（平板，大于等于 768px） */
+@media screen and (min-width: 768px) {
+  /* app start */
+  #app {
+    font-size: 14px;
+
+    /* app header start */
+    .my-header {
+      width: 100%;
+      height: 80px;
+      box-sizing: border-box;
+      padding-top: 6px;
+      padding-bottom: 4px;
+      padding-left: 20px;
+      padding-right: 20px;
+      background: #fff;
+      border-bottom: 1px solid #c4c4c4;
+    }
+    /* app header end */
+
+    /* app container start */
+    .container {
+      margin-top: -80px;
+    }
+    /* app container end */
+
+    /*app login start*/
+    .login {
+      .login-box {
+        height: 100%;
+        > .row {
+          margin-right: 0px;
+          margin-left: 0px;
+          margin: auto;
+          padding: 0;
+        }
+        .title {
+          margin-top: 180px;
+        }
+        .login-form-box {
+          margin: auto;
+          margin-top: 50px;
+          padding: 0;
+          .login-form {
+            width: 90%;
+            margin: auto;
+            margin-left: -20px;
+            label {
+              height: 34px;
+              line-height: 34px;
+              text-align: right;
+              color: #f9f9f9;
+              font-weight: bold;
+            }
+          }
+
+        }
+        .btnBox {
+          margin: 0;
+          margin-top: 70px;
+          margin-left: -30px;
+        }
+
+      }
+    }
+    /*app login end*/
+
+    /*app trial start*/
+    .trial {
+      .trial-wrapper {
+        .trial-query-wrapper {
+          margin: 0;
+          padding: 0;
+          #trialForm {
+            margin-top: 20px;
+            .input-item {
+              margin-bottom: 6px;
+              padding: 0;
+              padding-right: 6px;
+              margin-bottom: 16px;
+              label {
+                width: 44%;
+                padding-left: 0px;
+                padding-right: 0px;
+                height: 23px;
+                line-height: 1.7;
+                font-size: 12px;
+                text-align: right;
+                span {
+                  color: red;
+                  font-weight: bold;
+                }
+              }
+              .form-control {
+                width: 56%;
+              }
+            }
+          }
+          .trial-result-wrapper {
+            .trial-btn-box {
+              padding-left: 6px;
+              padding-right: 6px;
+            }
+            button {
+              margin-bottom: 6px;
+            }
+            .trial-result {
+            }
+            .result-item {
+              height: 23px;
+              line-height: 23px;
+              font-size: 12px;
+              margin-bottom: 20px;
+            }
+          }
+        }
+        .ticket-number {
+          label {
+            padding-left: 0px;
+            padding-right: 0px;
+            height: 23px;
+            line-height: 1.7;
+            font-size: 13px;
+            span {
+              color: red;
+              font-weight: bold;
+            }
+          }
+
+        }
+        .btn-box {
+          margin-top: 20px;
+          margin-bottom: 20px;
+          .result-item {
+            font-size: 13px;
+            margin-bottom: 8px;
+          }
+        }
+        .validate-text {
+          font-size: 14px;
+          color: red;
+          margin-bottom: 18px
+        }
+      }
+    }
+    /*app trial end*/
+
+  }
+
+  /* app end */
+
+}
+
+/* 中等屏幕（桌面显示器，大于等于 992px） */
+@media screen and (min-width: 992px) {
+  /* app start */
+  #app {
+    /*app login start*/
+    .login {
+      .login-box {
+        .login-form-box {
+          .login-form {
+            width: 90%;
+            margin: auto;
+            margin-left: -50px;
+          }
+        }
+        .btnBox {
+          margin-left: -100px;
+        }
+      }
+    }
+    /*app login end*/
+  }
+
+  /* app end */
+}
+
+/* 中等屏幕（桌面显示器，大于等于 1200px） */
+@media screen and (min-width: 1200px) {
+  #app {
+
+  }
+}
+
+/* pjbl 样式框架 1.0 end*/
+

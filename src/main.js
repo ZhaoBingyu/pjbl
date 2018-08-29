@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './common/css/common.css'
 import './common/lib/weui/lib/weui.min.css'
 import './common/lib/weui/css/jquery-weui.min.css'
+import './common/less/pjbl.common.less'
 
 import 'bootstrap/dist/js/bootstrap.min.js'
 import '@/common/js/common.pjbl.js'

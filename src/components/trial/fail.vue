@@ -42,7 +42,7 @@
 
 <style scoped lang="less" rel="stylesheet/less">
   .fail {
-    margin-top: 8px !important;
+    margin-top: 30px !important;
   }
 
 </style>

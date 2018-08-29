@@ -11,6 +11,10 @@
         </div>
       </div>
     </div>
+    <div class="row" style="margin-top: 30px;">
+      <div class="h4 col-sm-offset-5">联系人：肖经理</div>
+      <div class="h4 col-sm-offset-5">联系电话：15201626799</div>
+    </div>
     <div class="row" style="margin-top: 70px">
       <button type="button"
               class="btn btn-primary  confirm-btn col-xs-2 col-xs-offset-5"
@@ -41,7 +45,6 @@
 
 <style scoped lang="less" rel="stylesheet/less">
 .success{
-  margin-top: 8px !important;
+  margin-top: 30px !important;
 }
-
 </style>

@@ -237,5 +237,12 @@
       return length <= param[1] && length >= param[0]
     }
   }
+
+  window.pjbl.dateFormat = function (date) {
+    const year = date.slice(0,4)
+    const month = date.slice(4,6)
+    const day = date.slice(6)
+    return year + '-' + month + '-' + day
+  }
 })(jQuery)
 

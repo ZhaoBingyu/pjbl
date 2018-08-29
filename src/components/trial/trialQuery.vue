@@ -1,12 +1,12 @@
 <template>
   <!--<div class="trial container-fluid" :style="backgroundImgUrl">-->
-    <div class="trial container-fluid" >
+  <div class="trial-query container-fluid" :style="backgroundImgUrl">
     <div class="trial-container">
       <!--导航 start-->
       <myNav></myNav>
       <!--导航 end-->
       <div class="trial-query-wrapper">
-        <div class="search-box" style="border: 1px solid #cccccc; border-radius: 25px; padding: 30px">
+        <div class="search-box">
           <!--查询条件 start-->
           <div class="">
             <div class="row query-item">
@@ -97,58 +97,38 @@
 
 
         <!--查询结果 start-->
-        <div class="query-list-wrapper row">
+        <div class="query-list-wrapper ">
           <hr>
-          <div class="col-md-2 col-sm-2 col-xs-3 result-title">查询结果</div>
-          <div class="result-hr col-md-10 col-sm-10 col-xs-9"></div>
+          <div class="row">
+            <div class="col-md-2 col-sm-2 col-xs-3 result-title">查询结果</div>
+            <div class="result-hr col-md-10 col-sm-10 col-xs-9"></div>
+          </div>
           <!--数据List start-->
-          <div class="row" style="padding: 0;">
-            <table class="table-responsive table-hover">
+          <div class="table-responsive">
+            <table class="table">
               <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
+                <th>票据编号</th>
+                <th>票据金额</th>
+                <th>交易金额</th>
+                <th>手续费金额</th>
+                <th>票据状态</th>
+                <!--<th>开票日期</th>-->
+                <th>背书转让日期</th>
+                <th>到期日期</th>
+                <th>登记日期</th>
+                <!--<th>登记时间</th>-->
               </tr>
-              <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
-                <td>1</td>
+              <tr v-for="item in queryResultList">
+                <td>{{item.billNo}}</td>
+                <td>{{item.billAmt}}</td>
+                <td>{{item.txnAmt}}</td>
+                <td>{{item.feeAmt}}</td>
+                <td>{{item.billStatus}}</td>
+                <!--<td>{{item.drawDate}}</td>-->
+                <td>{{item.indorsDate}}</td>
+                <td>{{item.dueDate}}</td>
+                <td>{{item.regdate}}</td>
+                <!--<td>{{item.regtime}}</td>-->
               </tr>
             </table>
           </div>
@@ -163,7 +143,6 @@
 </template>
 
 <script type="text/ecmascript-6">
-
   const phoneNumber = window.sessionStorage.getItem('phone')
 
   import myNav from '@/components/trial/myNav'
@@ -184,7 +163,7 @@
         indorsDateTo: '',
         billNo: '',
         billStatus: '',
-
+        queryResultList: [],
         // ladRat: '',
         // feeAmt: '',
         // availableAmt: '',
@@ -215,18 +194,78 @@
       toTrialQuery: function () {
         this.$router.push('/trialQuery')
       },
+      //获取票据状态
+      getBillStatus: function(data){
+        switch (data) {
+          case '00':
+            data = '已试算'
+            return data
+          case '01':
+            data = '已审核'
+            return data
+          case '02':
+            data = '已登记'
+            return data
+          case '03':
+            data = '背书未签收'
+            return data
+          case '04':
+            data = '背书准签收'
+            return data
+          case '05':
+            data = '背书已签收'
+            return data
+          case '06':
+            data = '已付款'
+            return data
+          case '07':
+            data = '提示付款未签收'
+            return data
+          case '08':
+            data = '提示付款已签收'
+            return data
+          case '09':
+            data = '提示付款已拒付'
+            return data
+          case '10':
+            data = '已回款'
+            return data
+          case '11':
+            data = '已失败'
+            return data
+        }
+
+      },
       //查询接口
       searchQueryInter: function () {
         const sendUrl = window.pjbl.api.BillFactoring + "/YQLBillFactoring005"
         const sendBody = {
-          'phone': '18801176433'
+          'phone': window.sessionStorage.getItem('phone'),
+          'acptName': this.acptName,
+          'amt':this.amt,
+          'dueDateFrom':this.dueDateFrom,
+          'dueDateTo':this.dueDateTo,
+          'indorsDateFrom': this.indorsDateFrom,
+          'indorsDateTo':this.indorsDateTo
         }
         this.$http.post(sendUrl, sendBody)
           .then(
             (response) => {
               const result = response.body
-              console.log(result)
               if (result.code === "2000") {
+                const dataList = JSON.parse(result.dataList[0])
+                for (let i = 0; i < dataList.length; i++) {
+
+                  dataList[i].billStatus = this.getBillStatus(dataList[i].billStatus)
+                  dataList[i].indorsDate = window.pjbl.dateFormat(dataList[i].indorsDate)
+                  dataList[i].dueDate = window.pjbl.dateFormat(dataList[i].dueDate)
+                  dataList[i].regdate = window.pjbl.dateFormat(dataList[i].regdate)
+                  this.queryResultList.push(dataList[i])
+                  console.log(this.queryResultList[i])
+                  console.log( dataList[i].billStatus)
+                }
+
+
               } else {
                 this.validateText = result.message
               }
@@ -246,54 +285,8 @@
 
 <style scoped lang="less" rel="stylesheet/less">
   @media screen {
-    .trial {
-      .trial-query-wrapper {
-        margin-top: 30px;
-        .query-item {
-          margin-bottom: 20px;
-          padding: 0;
-          padding-right: 16px;
-          text-align: right;
-          > div {
-            margin-bottom: 10px;
-          }
-          label {
-            padding: 0;
-            height: 34px;
-            line-height: 30px;
-          }
-          div {
-            padding: 0;
-          }
-          .time-hr {
-            width: 1.8888888%;
-            padding: 0 6px;
-            text-align: center;
-            margin: auto;
-            font-size: 28px;
-            margin-bottom: 20px;
-          }
-        }
-        .query-list-wrapper {
-          margin: 0;
-          padding: 0;
-          width: 100%;
-          .result-title {
-            font-size: 12px;
-            font-weight: bold;
-            color: orangered;
-          }
-          .result-hr {
-            margin-top: 5px;
-            margin-left: -8px;
-            border-bottom: 1px solid orangered;
-          }
-        }
-      }
-    }
-
     @media (min-width: 768px) {
-      .trial {
+      .trial-query {
         width: 100%;
         height: 100%;
         margin-bottom: 80px;
@@ -349,6 +342,21 @@
 
       }
     }
+  }
+
+  table th {
+    padding: 8px 5px;
+    vertical-align: middle;
+    text-align: center;
+    color: white;
+    background: #e9565c;
+  }
+
+  table tr td {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
   }
 
 </style>

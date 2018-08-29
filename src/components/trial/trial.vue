@@ -1,6 +1,6 @@
 <template>
-  <!--<div class="trial container-fluid" :style="backgroundImgUrl">-->
-    <div class="trial container-fluid" >
+  <div class="trial container-fluid" :style="backgroundImgUrl">
+    <!--<div class="trial container-fluid" >-->
     <div class="trial-container">
       <!--导航 start-->
       <myNav></myNav>
@@ -12,7 +12,7 @@
           <!--试算信息输入 start-->
           <!--<div class="col-md-6 col-sm-6 col-xs-12">-->
           <div>
-            <div class="row" style="padding-top: 25px; border: 1px solid #ccc; border-radius: 25px;">
+            <div class="row" >
               <form id="trialForm">
                 <div class="col-md-6 col-sm-6 col-xs-12 input-item">
                   <label for="honnerName" class="col-md-4 col-sm-5 col-xs-12"><span>*</span>承兑企业名称：</label>
@@ -65,15 +65,15 @@
                 <!--</button>-->
                 <!--</div>-->
                 <div class="row trialResult" style="display: none">
-                  <div class=" col-sm-4 col-xs-12  result-item">
+                  <div class="col-lg-2 col-lg-offset-2 col-sm-4 col-xs-12  result-item">
                     <button type="button" class="btn btn-info">保理比例: <span>{{ ladRat + '%'}}</span></button>
                     <!--保理比例: <span>{{ ladRat + '%'}}</span>-->
                   </div>
-                  <div class="col-sm-4 col-xs-12 result-item">
+                  <div class="col-lg-2  col-lg-offset-1 col-sm-4 col-xs-12 result-item">
                     <button type="button" class="btn btn-info">保理金额: <span>{{'￥'+feeAmt}}</span></button>
                     <!--保理金额: <span>{{'￥'+feeAmt}}</span>-->
                   </div>
-                  <div class="col-sm-4 col-xs-12 result-item">
+                  <div class="col-lg-2  col-lg-offset-1 col-sm-4 col-xs-12 result-item">
                     <button type="button" class="btn btn-info">可用金额: <span>{{'￥'+availableAmt}}</span></button>
                     <!--可用金额: <span>{{'￥'+availableAmt}}</span>-->
                   </div>
@@ -101,12 +101,12 @@
         <!--&lt;!&ndash;票据编号 end&ndash;&gt;-->
         <!--试算表单 end-->
         <!--按钮组 start-->
-        <div class="row btn-box">
-          <button type="button" class="btn btn-success col-md-3  col-sm-3  col-xs-12  col-md-offset-2  col-sm-offset-2"
+        <div class="row btn-box" >
+          <button type="button" class="btn btn-success col-lg-2 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-sm-offset-2 col-xs-4 col-xs-offset-1"
                   @click="getTrial">试算
           </button>
           <button type="button"
-                  class="btn btn-primary  confirm-btn col-md-3 col-md-offset-3 col-sm-3 col-sm-offset-2 col-xs-4 col-xs-offset-1"
+                  class="btn btn-primary  confirm-btn col-lg-2 col-lg-offset-3 col-md-3 col-md-offset-3 col-sm-3 col-sm-offset-2 col-xs-4 col-xs-offset-2"
                   @click="goNext">下一步
           </button>
           <!--<button type="button"-->
@@ -125,8 +125,6 @@
 
 <script type="text/ecmascript-6">
   import myNav from '@/components/trial/myNav'
-
-
   export default {
     name: 'trial',
     components: {
@@ -355,96 +353,12 @@
 </script>
 
 <style scoped lang="less" rel="stylesheet/less">
-  .ticket-validate-text {
-    text-align: left;
-    color: red;
-    font-size: 16px;
-    height: 34px;
-    line-height: 34px;
-  }
+
 
   @media screen {
-    .trial {
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-    }
 
-    .trial-wrapper {
-      margin-top: 10px;
-      margin-left: 26px;
-      margin-right: 26px;
-      .trial-query-wrapper {
-        #trialForm {
-          .input-item {
-            margin-bottom: 6px;
-            padding: 0;
-            padding-right: 6px;
-            label {
-              width: 33.33333333%;
-              padding-left: 0px;
-              padding-right: 0px;
-              height: 23px;
-              line-height: 1.7;
-              font-size: 13px;
-              text-align: right;
-              span {
-                color: red;
-                font-weight: bold;
-              }
-            }
-            .form-control {
-              width: 66.66666667%;
-            }
-          }
-        }
-        .trial-result-wrapper {
-          .trial-btn-box {
-            padding-left: 6px;
-            padding-right: 6px;
-          }
-          button {
-            margin-bottom: 6px;
-          }
-          .trial-result {
 
-          }
-          .result-item {
-            height: 23px;
-            line-height: 23px;
-            font-size: 13px;
-            text-align: center;
-          }
-        }
-      }
-      .ticket-number {
-        label {
-          padding-left: 0px;
-          padding-right: 0px;
-          height: 23px;
-          line-height: 1.7;
-          font-size: 13px;
-          span {
-            color: red;
-            font-weight: bold;
-          }
-        }
 
-      }
-      .btn-box {
-        margin-top: 20px;
-        margin-bottom: 20px;
-        .result-item {
-          font-size: 13px;
-          margin-bottom: 8px;
-        }
-      }
-      .validate-text {
-        font-size: 14px;
-        color: red;
-        margin-bottom: 18px
-      }
-    }
 
     @media (min-width: 768px) {
       .trial {

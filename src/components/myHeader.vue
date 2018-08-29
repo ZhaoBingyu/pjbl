@@ -5,10 +5,10 @@
       </div>
       <div class="user-info col-sm-8 col-xs-5" v-if="hasLoginInfo">
         <div class="row">
-          <div class=" col-sm-3 col-sm-offset-8 col-xs-12">
+          <div class=" col-sm-6 col-sm-offset-4 col-xs-12">
             <div class="user-name"><span>&nbsp;用户：{{phoneNumber}}</span></div>
           </div>
-          <div class=" col-sm-1 col-xs-12">
+          <div class=" col-sm-2 col-xs-12">
             <div class="logout"><span @click="goLogout">&nbsp退出</span></div>
           </div>
         </div>
